@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>Loja Simples</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Loja Online</h1>
+  <div class="produtos">
+    <div class="produto">
+      <h2>Camisa Preta</h2>
+      <p>R$ 49,90</p>
+      <button onclick="adicionarCarrinho('Camisa Preta', 49.9)">Adicionar</button>
+    </div>
+    <div class="produto">
+      <h2>Tênis Esportivo</h2>
+      <p>R$ 199,90</p>
+      <button onclick="adicionarCarrinho('Tênis Esportivo', 199.9)">Adicionar</button>
+    </div>
+  </div>
+
+  <h2>Carrinho</h2>
+  <ul id="carrinho"></ul>
+  <p id="total">Total: R$ 0,00</p>
+
+  <script src="script.js"></script>
+</body>
+</html>
+let carrinho = [];
+let total = 0;
+
+function adicionarCarrinho(nome, preco) {
+  carrinho.push({ nome, preco });
+  atualizarCarrinho();
+}
+
+function atualizarCarrinho() {
+  const ul = document.getElementById("carrinho");
+  ul.innerHTML = "";
+
+  total = 0;
+  carrinho.forEach(item => {
+    const li = document.createElement("li");
+    li.textContent = `${item.nome} - R$ ${item.preco.toFixed(2)}`;
+    ul.appendChild(li);
+    total += item.preco;
+  });
+
+  document.getElementById("total").textContent = `Total: R$ ${total.toFixed(2)}`;
+}
